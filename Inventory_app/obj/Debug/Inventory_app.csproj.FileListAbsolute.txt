@@ -1,0 +1,10 @@
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\bin\Debug\Inventory_app.exe.config
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\bin\Debug\Inventory_app.exe
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\bin\Debug\Inventory_app.pdb
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.csprojResolveAssemblyReference.cache
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.Form1.resources
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.Properties.Resources.resources
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.csproj.GenerateResource.Cache
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.exe
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.pdb
+c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Debug\Inventory_app.AboutBox1.resources
