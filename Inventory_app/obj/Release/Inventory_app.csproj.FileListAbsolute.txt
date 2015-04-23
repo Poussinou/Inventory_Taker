@@ -1,9 +1,0 @@
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\bin\Release\Inventory_app.exe.config
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\bin\Release\Inventory_app.exe
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\bin\Release\Inventory_app.pdb
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Release\Inventory_app.AboutBox1.resources
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Release\Inventory_app.Form1.resources
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Release\Inventory_app.Properties.Resources.resources
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Release\Inventory_app.csproj.GenerateResource.Cache
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Release\Inventory_app.exe
-c:\users\salvador\documents\visual studio 2013\Projects\Inventory_app\Inventory_app\obj\Release\Inventory_app.pdb
