@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,19 +17,25 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.border.EtchedBorder;
 
 public class Main_Window extends JFrame {
 
@@ -36,12 +46,28 @@ public class Main_Window extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private FileFilter filter = new FileNameExtensionFilter("IDB File","idb");
+	private Base64.Encoder b64enc = Base64.getEncoder();
+	private Base64.Decoder b64dec = Base64.getDecoder();
+	private static JMenuBar menuBar;
+	private JMenu menu;
+	private JLabel lab = new JLabel("<html><h1><center>Copyright © Salvador Pardiñas, 2017</center></h1><p>InventoryGUI is free software protected under the <b><a href=`https://www.gnu.org/licenses/gpl-3.0-standalone.html`>GPLv3 license</a></b>.</p></html>".replaceAll("`", ""+'"'));
+	private JMenuItem mItem;
+	private boolean splitorlabel;
 	private JSplitPane splitPane_3;
 	private JButton btnExpandTable;
 	private JSplitPane splitPane_1;
+	private JSplitPane supersplit;
 	private JButton btnSave;
 	private JButton btnLoad;
 	private JScrollPane scroll;
+	private JPanel panel;
+	private JLabel lblNewLabel;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 
 	/**
 	 * Launch the application.
@@ -51,6 +77,7 @@ public class Main_Window extends JFrame {
 			public void run() {
 				try {
 					Main_Window frame = new Main_Window();
+					frame.setJMenuBar(menuBar);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,17 +95,48 @@ public class Main_Window extends JFrame {
 	
 	@SuppressWarnings("serial")
 	public Main_Window() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e1) {
+			return;
+		}
 		setTitle("Inventory GUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 526, 300);
+		menuBar = new JMenuBar();
+		menu = new JMenu("Help");
+		menu.setMnemonic(KeyEvent.VK_H);
+		menuBar.add(menu);
+		mItem = new JMenuItem("About");
+		mItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
+		mItem.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(splitorlabel)
+				{
+					supersplit.setRightComponent(lab);
+					splitorlabel = false;
+				}
+				else
+				{
+					supersplit.setRightComponent(splitPane_3);
+					splitorlabel = true;
+				}
+			}
+			
+		});
+		menu.add(mItem);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
 		splitPane_1 = new JSplitPane();
-		contentPane.add(splitPane_1, BorderLayout.NORTH);
-		
+		supersplit = new JSplitPane();
+		supersplit.setLeftComponent(splitPane_1);
+		contentPane.add(supersplit, BorderLayout.CENTER);
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -99,8 +157,20 @@ public class Main_Window extends JFrame {
 						}
 					}
 					Path dest = Paths.get(a);
+					String out_str = "";
+					for(String xbx : to_save)
+					{
+						out_str += xbx + "\n";
+					}
 					try {
-						Files.write(dest, to_save,Charset.forName("UTF-8"));
+						byte[] encoded = b64enc.encode(out_str.getBytes("UTF8"));
+						byte[] result = new byte[encoded.length + 4];
+						result[0] = 8;
+						result[1] = 7;
+						result[2] = 5;
+						result[3] = 10;
+						System.arraycopy(encoded, 0, result, 4, encoded.length);
+						Files.write(dest, result);
 					} catch (IOException e) {
 						JOptionPane.showMessageDialog(null, e.toString(),"Error Writing",JOptionPane.ERROR_MESSAGE);
 					}
@@ -118,7 +188,10 @@ public class Main_Window extends JFrame {
 				if(seleccion==JFileChooser.APPROVE_OPTION){
 					String a = fc.getSelectedFile().getAbsolutePath();
 				try {
-					List<String> input = Files.readAllLines(Paths.get(a), Charset.forName("UTF-8"));
+					byte[] readin = Files.readAllBytes(Paths.get(a));
+					byte[] input1 = b64dec.decode(Arrays.copyOfRange(readin, 4, readin.length));
+					String input2 = new String(input1);
+					List<String> input = Arrays.asList(input2.split("\n"));
 					Object[][] out_datus = new Object[input.size()][2];
 					String[] in_datus;
 					for(int i = 0; i < input.size(); i++)
@@ -156,34 +229,63 @@ public class Main_Window extends JFrame {
 				"Item Name", "Quantity"
 			}
 		) {
+			@SuppressWarnings({ "rawtypes" })
 			Class[] columnTypes = new Class[] {
 				String.class, Long.class
 			};
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			
-			public int change_data(Object[][] in)
-			{
-				this.setDataVector(in, columnTypes);
-				return 0;
-			}
+			
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(256);
 		splitPane_3 = new JSplitPane();
 		scroll = new JScrollPane(table);
 		scroll.setPreferredSize(new Dimension(150,200));;
 		splitPane_3.setLeftComponent(scroll);
-		contentPane.add(splitPane_3, BorderLayout.SOUTH);
+		supersplit.setRightComponent(splitPane_3);
+		splitorlabel = true;
+		supersplit.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane_3.setResizeWeight(1);
 		
+		panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setSize(new Dimension(200, 200));
+		splitPane_3.setRightComponent(panel);
+		supersplit.setResizeWeight(0);
+		panel.setLayout(new MigLayout("", "[126px]", "[25px][][][][][][][][][][][]"));
+		
+		lblNewLabel = new JLabel(" ");
+		panel.add(lblNewLabel, "cell 0 0");
+		
+		label = new JLabel(" ");
+		panel.add(label, "cell 0 1");
+		
+		label_1 = new JLabel(" ");
+		panel.add(label_1, "cell 0 2");
+		
 		btnExpandTable = new JButton("Expand Table");
+		btnExpandTable.setBounds(0, 0, 0, 0);
 		btnExpandTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				expand_table(table);
 			}
 		});
-		splitPane_3.setRightComponent(btnExpandTable);
+		panel.add(btnExpandTable, "cell 0 4,alignx left,aligny center");
+		
+		label_2 = new JLabel(" ");
+		panel.add(label_2, "cell 0 5");
+		
+		label_3 = new JLabel(" ");
+		panel.add(label_3, "cell 0 8");
+		
+		label_4 = new JLabel(" ");
+		panel.add(label_4, "cell 0 10");
+		
+		label_5 = new JLabel(" ");
+		panel.add(label_5, "cell 0 11");
 	}
 
 }

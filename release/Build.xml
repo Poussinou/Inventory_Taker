@@ -7,15 +7,16 @@
     <property name="dir.workspace" value="/home/darkfm/workspace"/>
     <property name="dir.jarfile" value="${dir.buildfile}"/>
     <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/Inventory.jar">
+        <jar destfile="${dir.jarfile}/InventoryGUI.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="inventoryGUI.Main_Window"/>
                 <attribute name="Class-Path" value="."/>
-                <attribute name="Rsrc-Class-Path" value="./"/>
+                <attribute name="Rsrc-Class-Path" value="./ miglayout15-swing.jar"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
             <fileset dir="/home/darkfm/InventoryGUI/bin"/>
+            <zipfileset dir="/home/darkfm/InventoryGUI" includes="miglayout15-swing.jar"/>
         </jar>
     </target>
 </project>
