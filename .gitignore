@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so
@@ -16,3 +17,8 @@
 *.dSYM/
 bin/
 obj/
+=======
+*.jar
+*.zip
+*.class
+>>>>>>> Initial commit

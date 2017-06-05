@@ -1,2 +1,2 @@
-# Inventory_Taker
-A simple inventory taker in C#, made by the necessity of keeping tabs on my retro consoles.
+# InventoryGUI
+A simple inventory program in Java
