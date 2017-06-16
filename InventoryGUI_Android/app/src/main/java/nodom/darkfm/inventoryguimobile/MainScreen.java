@@ -16,6 +16,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+	Copyright (C) Salvador Pardiñas @ https://github.com/salvadorp2001 GPLv3
+*/
+
 public class MainScreen extends AppCompatActivity {
 
     @Override
