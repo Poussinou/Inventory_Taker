@@ -12,11 +12,10 @@
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="inventoryGUI.Main_Window"/>
                 <attribute name="Class-Path" value="."/>
-                <attribute name="Rsrc-Class-Path" value="./ miglayout15-swing.jar"/>
+                <attribute name="Rsrc-Class-Path" value="./"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
-            <fileset dir="/home/darkfm/InventoryGUI/bin"/>
-            <zipfileset dir="/home/darkfm/InventoryGUI" includes="miglayout15-swing.jar"/>
+            <fileset dir="/home/darkfm/Github_Repos/InventoryGUI/bin"/>
         </jar>
     </target>
 </project>

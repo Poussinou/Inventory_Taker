@@ -34,7 +34,6 @@ import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.border.EtchedBorder;
 
 public class Main_Window extends JFrame {
@@ -46,8 +45,8 @@ public class Main_Window extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private FileFilter filter = new FileNameExtensionFilter("IDB File","idb");
-	private Base64.Encoder b64enc = Base64.getEncoder();
-	private Base64.Decoder b64dec = Base64.getDecoder();
+	private Base64.Encoder b64enc = Base64.getMimeEncoder();
+	private Base64.Decoder b64dec = Base64.getMimeDecoder();
 	private static JMenuBar menuBar;
 	private JMenu menu;
 	private JLabel lab = new JLabel("<html><h1><center>Copyright © Salvador Pardiñas, 2017</center></h1><p>InventoryGUI is free software protected under the <b><a href=`https://www.gnu.org/licenses/gpl-3.0-standalone.html`>GPLv3 license</a></b>.</p></html>".replaceAll("`", ""+'"'));
@@ -61,13 +60,6 @@ public class Main_Window extends JFrame {
 	private JButton btnLoad;
 	private JScrollPane scroll;
 	private JPanel panel;
-	private JLabel lblNewLabel;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
-	private JLabel label_5;
 
 	/**
 	 * Launch the application.
@@ -145,7 +137,7 @@ public class Main_Window extends JFrame {
 				int seleccion = fc.showSaveDialog(null);
 				if(seleccion==JFileChooser.APPROVE_OPTION){
 					String a = fc.getSelectedFile().getAbsolutePath();
-					if(!a.endsWith(".idb")){
+					if(!a.toLowerCase().endsWith(".idb")){
 						a+=".idb";
 					}
 					List<String> to_save = new LinkedList<String>();
@@ -153,7 +145,7 @@ public class Main_Window extends JFrame {
 					{
 						//System.out.println((table.getModel().getValueAt(i, 0).toString().isEmpty()));
 						if(!(table.getModel().getValueAt(i,0).toString().isEmpty())){
-						to_save.add(table.getModel().getValueAt(i, 0).toString().replaceAll("\\|", "`")+"|"+table.getModel().getValueAt(i, 1).toString());
+							to_save.add(table.getModel().getValueAt(i, 0).toString().replaceAll("\\|", "`")+"|"+table.getModel().getValueAt(i, 1).toString());
 						}
 					}
 					Path dest = Paths.get(a);
@@ -187,6 +179,10 @@ public class Main_Window extends JFrame {
 				int seleccion = fc.showOpenDialog(null);
 				if(seleccion==JFileChooser.APPROVE_OPTION){
 					String a = fc.getSelectedFile().getAbsolutePath();
+					if(!(a.toLowerCase().endsWith(".idb")))
+					{
+						a = a + ".idb";
+					}
 				try {
 					byte[] readin = Files.readAllBytes(Paths.get(a));
 					byte[] input1 = b64dec.decode(Arrays.copyOfRange(readin, 4, readin.length));
@@ -197,7 +193,7 @@ public class Main_Window extends JFrame {
 					for(int i = 0; i < input.size(); i++)
 					{
 						in_datus = input.get(i).split("\\|");
-						out_datus[i] = new Object[]{in_datus[0],Integer.parseInt(in_datus[1])};
+						out_datus[i] = new Object[]{in_datus[0].replaceAll("`", "|"),Integer.parseInt(in_datus[1])};
 					}
 					DefaultTableModel a1 = (DefaultTableModel) table.getModel();
 					a1.setDataVector(out_datus, new Object[]{String.class,Long.class});
@@ -255,16 +251,7 @@ public class Main_Window extends JFrame {
 		panel.setSize(new Dimension(200, 200));
 		splitPane_3.setRightComponent(panel);
 		supersplit.setResizeWeight(0);
-		panel.setLayout(new MigLayout("", "[126px]", "[25px][][][][][][][][][][][]"));
-		
-		lblNewLabel = new JLabel(" ");
-		panel.add(lblNewLabel, "cell 0 0");
-		
-		label = new JLabel(" ");
-		panel.add(label, "cell 0 1");
-		
-		label_1 = new JLabel(" ");
-		panel.add(label_1, "cell 0 2");
+		panel.setLayout(new BorderLayout(0, 0));
 		
 		btnExpandTable = new JButton("Expand Table");
 		btnExpandTable.setBounds(0, 0, 0, 0);
@@ -273,19 +260,7 @@ public class Main_Window extends JFrame {
 				expand_table(table);
 			}
 		});
-		panel.add(btnExpandTable, "cell 0 4,alignx left,aligny center");
-		
-		label_2 = new JLabel(" ");
-		panel.add(label_2, "cell 0 5");
-		
-		label_3 = new JLabel(" ");
-		panel.add(label_3, "cell 0 8");
-		
-		label_4 = new JLabel(" ");
-		panel.add(label_4, "cell 0 10");
-		
-		label_5 = new JLabel(" ");
-		panel.add(label_5, "cell 0 11");
+		panel.add(btnExpandTable);
 	}
 
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nodom.darkfm.inventoryguimobile.MainScreen">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Save"
+        android:onClick="save_data"
+        tools:layout_editor_absoluteY="4dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toLeftOf="@+id/button3"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Load"
+        android:onClick="load_data"
+        tools:layout_editor_absoluteY="4dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toLeftOf="@+id/button4"
+        app:layout_constraintLeft_toRightOf="@+id/button3" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="106dp"
+        android:layout_height="48dp"
+        android:text="Add Item"
+        android:onClick="expand_table"
+        tools:layout_editor_absoluteY="4dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toLeftOf="@+id/button2"
+        app:layout_constraintLeft_toRightOf="@+id/button" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="325dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:hint="Item Number"
+        android:inputType="number"
+        android:singleLine="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="325dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:hint="Item Name"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="Quantity"
+        android:inputType="number"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="105dp"
+        android:layout_height="48dp"
+        android:onClick="load_item"
+        android:text="Reload"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="4dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/button2" />
+
+</android.support.constraint.ConstraintLayout>
