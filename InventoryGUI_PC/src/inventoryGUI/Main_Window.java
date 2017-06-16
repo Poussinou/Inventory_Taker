@@ -23,11 +23,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Base64;
@@ -93,6 +95,9 @@ public class Main_Window extends JFrame {
 				| UnsupportedLookAndFeelException e1) {
 			return;
 		}
+		URL resrc = getClass().getResource("/icon_small.png");
+		ImageIcon imgicon = new ImageIcon(resrc);
+		setIconImage(imgicon.getImage());
 		setTitle("Inventory GUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 526, 300);
