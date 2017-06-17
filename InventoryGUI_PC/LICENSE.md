@@ -1,1 +1,1 @@
-../LICENSE.md
+../LICENSES/code.md
