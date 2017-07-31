@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        config {
+        }
     }
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
@@ -9,8 +11,8 @@ android {
         applicationId "nodom.darkfm.inventoryguimobile"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 2
-        versionName '1.1'
+        versionCode 5
+        versionName '1.5'
     }
     buildTypes {
         release {

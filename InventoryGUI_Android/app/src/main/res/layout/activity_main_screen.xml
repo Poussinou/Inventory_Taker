@@ -89,4 +89,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/button2" />
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="106dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="0dp"
+        android:onClick="shrink_table"
+        android:text="Rm Item"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/button3" />
+
 </android.support.constraint.ConstraintLayout>

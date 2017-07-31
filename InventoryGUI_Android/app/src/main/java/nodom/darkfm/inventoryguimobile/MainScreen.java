@@ -138,4 +138,32 @@ public class MainScreen extends AppCompatActivity {
         EditText itmtxt = (EditText)findViewById(R.id.editText);
         itmtxt.setHint("Item number/"+itm_quant.length);
     }
+
+    public void shrink_table(View vw)
+    {
+        String[] new_itm_nme = new String[itm_nme.length-1];
+        int indx = 0;
+        for(int i = 0; i < itm_nme.length;i++)
+        {
+            if(i!=cur_itm)
+            {
+                new_itm_nme[indx] = itm_nme[i];
+                indx++;
+            }
+        }
+        itm_nme = new_itm_nme;
+        int[] new_itm_quant = new int[itm_quant.length-1];
+        indx = 0;
+        for(int i = 0; i < itm_quant.length; i++)
+        {
+            if(i!=cur_itm)
+            {
+                new_itm_quant[indx] = itm_quant[i];
+                indx++;
+            }
+        }
+        itm_quant = new_itm_quant;
+        EditText itmtxt = (EditText)findViewById(R.id.editText);
+        itmtxt.setHint("Item number/"+itm_quant.length);
+    }
 }
